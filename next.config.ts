@@ -1,3 +1,5 @@
+import { withSentryConfig } from "@sentry/nextjs/config";
+// import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -17,4 +19,12 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  org: "نام-سازمان-تو",
+  project: "نام-پروژه-تو",
+  silent: !process.env.CI,
+  sourcemaps: {
+    disable: false,
+  },
+  telemetry: false,
+});
